@@ -37,7 +37,10 @@ public class Colosseum {
      * Useful functions: next(), nextInt() .
      */
     static Scanner myScan;
-
+    /**
+     * Second input scanner specifically for name in buildPokemon().
+     */
+    static Scanner myScan0;
     /**
      * We are now reimplementing this to meet our new Pokemon specifications. <br>
      * The process will still be the same for getting the information from the user,
@@ -103,7 +106,39 @@ public class Colosseum {
      *         <p>
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
+        final int maxHP = 50;
+        final int minHP = 1;
+        final int maxAttack = 49;
+        final int minAttack = 1;
+        final int totalAttDef = 50;
+        Pokemon returnPokemon = new Pokemon();
+        System.out.println("What's your pokemon's name?: ");
+        String newName = myScan0.nextLine();
+        System.out.print("How many hit points will it have? (1-50): ");
+        int hitPoints = myScan.nextInt();
+        while (hitPoints > maxHP || hitPoints < minHP) {
+            System.out.print("Sorry. Hit points must be between 1 and 50: ");
+            hitPoints = myScan.nextInt();
+        }
+
+        System.out.println("Split fifty points between attack level and defense level");
+        System.out.print("Enter your attack level (1-49): ");
+        int attack = myScan.nextInt();
+        while (attack > maxAttack || attack < minAttack) {
+            System.out.print("Sorry. The attack level must be between 1 and 49: ");
+            attack = myScan.nextInt();
+        }
+        System.out.print("Enter your defense level (1-" + (totalAttDef - attack) + "): ");
+        int defense = myScan.nextInt();
+        while (defense > (totalAttDef - attack) || defense < 1) {
+            System.out.print("Sorry. The defense level must be between 1 and "
+                    + (totalAttDef - attack) + ": ");
+            defense = myScan.nextInt();
+        }
+        returnPokemon.setName(newName);
+        returnPokemon.setHitPoints(hitPoints);
+        returnPokemon.setAttackLevel(attack);
+        returnPokemon.setDefenseLevel(defense);
         return returnPokemon;
     }
 
@@ -138,11 +173,19 @@ public class Colosseum {
      * You do not need to modify this function.
      */
     public static void determineWinner() {
+        if (firstPokemon.getHitPoints() < 1 && secondPokemon.getHitPoints() < 1) {
+            System.out.println("It's a tie!");
+        } else if (firstPokemon.getHitPoints() < 1) {
+            System.out.println(secondPokemon.getName() + " has won!");
+        } else {
+            System.out.println(firstPokemon.getName() + " has won!");
+        }
+        /*
         if (firstPokemon.getHitPoints() <= 0) {
             System.out.println(secondPokemon.getName() + " is the winner!");
         } else {
             System.out.println(firstPokemon.getName() + " is the winner!");
-        }
+        } */
     }
 
     /**
@@ -211,6 +254,7 @@ public class Colosseum {
      */
     public static void main(final String[] unused) {
         myScan = new Scanner(System.in);
+        myScan0 = new Scanner(System.in);
         initializePokemon();
         determineOrder();
         System.out.println("");
@@ -242,5 +286,6 @@ public class Colosseum {
         }
 
         myScan.close();
+        myScan0.close();
     }
 }

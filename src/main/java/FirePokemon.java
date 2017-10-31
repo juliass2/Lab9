@@ -63,8 +63,8 @@ public class FirePokemon extends Pokemon {
         if (fatal) {
             return true;
         }
-        boolean isWater = opponent.pokeType.equals(this.pokeType);
-        if (isWater) {
+        boolean isFire = opponent.pokeType.equals(this.pokeType);
+        if (isFire) {
             return false;
         }
         if (specialtyProbability < Math.random()) {

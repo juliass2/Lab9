@@ -106,12 +106,29 @@ public class Colosseum {
      *         <p>
      */
     public static Pokemon buildPokemon() {
+        printTypeMenu();
+        String selectedType = myScan0.nextLine();
+        while (!selectedType.equals("1") && !selectedType.equals("2")
+                && !selectedType.equals("3")) {
+            System.out.println("Invalid response.");
+            printTypeMenu();
+            selectedType = myScan0.nextLine();
+        }
         final int maxHP = 50;
         final int minHP = 1;
         final int maxAttack = 49;
         final int minAttack = 1;
         final int totalAttDef = 50;
+
         Pokemon returnPokemon = new Pokemon();
+        if (selectedType.equals("1")) {
+            returnPokemon = new ElectricPokemon();
+        } else if (selectedType.equals("2")) {
+            returnPokemon = new FirePokemon();
+        } else if (selectedType.equals("3")) {
+            returnPokemon = new WaterPokemon();
+        }
+
         System.out.println("What's your pokemon's name?: ");
         String newName = myScan0.nextLine();
         System.out.print("How many hit points will it have? (1-50): ");
@@ -173,19 +190,11 @@ public class Colosseum {
      * You do not need to modify this function.
      */
     public static void determineWinner() {
-        if (firstPokemon.getHitPoints() < 1 && secondPokemon.getHitPoints() < 1) {
-            System.out.println("It's a tie!");
-        } else if (firstPokemon.getHitPoints() < 1) {
-            System.out.println(secondPokemon.getName() + " has won!");
-        } else {
-            System.out.println(firstPokemon.getName() + " has won!");
-        }
-        /*
         if (firstPokemon.getHitPoints() <= 0) {
             System.out.println(secondPokemon.getName() + " is the winner!");
         } else {
             System.out.println(firstPokemon.getName() + " is the winner!");
-        } */
+        }
     }
 
     /**

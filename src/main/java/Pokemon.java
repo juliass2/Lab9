@@ -204,6 +204,7 @@ public class Pokemon {
                         + (opponent.hitPoints - totalDamage) + " hit points");
             } else {
                 System.out.println(opponent.name + " has been defeated!");
+                return true;
             }
             /*
              * Set the opponents hitPoints appropriately.

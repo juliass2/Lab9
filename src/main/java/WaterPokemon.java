@@ -67,7 +67,7 @@ public class WaterPokemon extends Pokemon {
             return false;
         }
         boolean isWater = opponent.pokeType.equals(this.pokeType);
-        if (!isWater) {
+        if (isWater) {
             return false;
         }
         if (specialtyProbability < Math.random()) {

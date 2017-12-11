@@ -6,7 +6,7 @@ public class WaterPokemon extends Pokemon {
     /**
      * The value we will be setting our specialty probability to.
      */
-    final double specProb = 0.2;
+    final double specProb = 1;
     /**
      * We now have a specialty attack for the water pokemon! Hydro cannon attack!
      */
@@ -64,11 +64,11 @@ public class WaterPokemon extends Pokemon {
     public boolean attack(final Pokemon opponent) {
         boolean fatal = super.attack(opponent);
         if (fatal) {
-            return true;
+            return true; //if fatal the battle is over
         }
         boolean isWater = opponent.pokeType.equals(this.pokeType);
         if (isWater) {
-            return false;
+            return false; //if the type is the same, and is not fatal, the battle is not over
         }
         if (specialtyProbability < Math.random()) {
             return false;
